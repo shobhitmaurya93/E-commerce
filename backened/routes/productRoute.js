@@ -1,0 +1,10 @@
+import express from 'express';
+import { addProduct, changeStock, productById, productList } from '../controller/ProductController.js';
+import { upload } from '../config/multer.js';
+import isSeller from '../middleware/isSeller.js';
+const productRouter=express.Router();
+productRouter.post("/add",upload.array(['images']),isSeller,addProduct);
+productRouter.get("/list",productList);
+productRouter.get("/id",productById);
+productRouter.post("/stock",isSeller,changeStock);
+export default productRouter;
